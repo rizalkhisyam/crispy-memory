@@ -1,29 +1,22 @@
 <template>
   <the-header title="Remainder"></the-header>
-  <stored-resources :resources="storedResources"></stored-resources>
+  <the-resources></the-resources>
+  <!-- <stored-resources :resources="storedResources"></stored-resources> -->
 </template>
 
 <script>
 // import LearningResource from './components/learning-resources/LearningResource.vue';
-import StoredResources from './components/learning-resources/StoredResources.vue';
+// import StoredResources from './components/learning-resources/StoredResources.vue';
 import TheHeader from './components/Layouts/TheHeader.vue';
+import TheResources from './components/learning-resources/TheResources.vue';
 export default {
   components: {
     // LearningResource,
     TheHeader,
-    StoredResources,
+    TheResources,
   },
   data() {
-    return {
-      storedResources: [
-        {
-          id: 'random-id-22141',
-          title: 'Official vuejs tutor',
-          description: 'this is course vuejs',
-          link: 'http://www.github.com/rizalkhisyam',
-        },
-      ],
-    };
+    return {};
   },
 };
 </script>
