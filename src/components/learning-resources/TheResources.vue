@@ -47,12 +47,26 @@ export default {
   provide() {
     return {
       resources: this.storedResources,
+      addResource: this.addResources
     };
   },
   methods: {
     setSelectedTab(tab) {
       this.selectedTab = tab;
     },
+
+    addResources(title, description, url){
+      const newResource = {
+        id: new Date().toISOString(),
+        title: title,
+        description: description,
+        url: url
+      }
+
+      this.storedResources.unshift(newResource)
+      this.selectedTab = 'stored-resources'
+
+    }
   },
 };
 </script>
