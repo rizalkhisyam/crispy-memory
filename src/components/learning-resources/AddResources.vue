@@ -1,4 +1,7 @@
 <template>
+<base-dialog v-if="inputIsInvalid" title="Invalid Input">
+  <template #default></template>
+</base-dialog>
   <base-card>
     <h2>Add Resources</h2>
     <div>
@@ -30,18 +33,25 @@
 </template>
 
 <script>
+import BaseDialog from '../UI/BaseDialog.vue'
 export default {
+  components: { BaseDialog },
   inject: ['addResource'],
   data(){
     return {
       title: '',
       description: '',
-      url: ''
+      url: '',
+      inputIsInvalid: false
     }
   },
   methods: {
     submitData(){
-      this.addResource(this.title, this.description, this.url)
+      if(this.title === '' || this.description === '' || this.url === ''){
+        return this.inputIsInvalid = true
+      }else {         
+        return this.addResource(this.title, this.description, this.url)
+      }
     }
   }
 }
