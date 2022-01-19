@@ -1,14 +1,24 @@
 <template>
-<base-dialog v-if="inputIsInvalid" title="Invalid Input">
-  <template #default></template>
-</base-dialog>
+  <base-dialog
+    v-if="inputIsInvalid"
+    title="Invalid Input"
+    @close="confirmError"
+  >
+    <template #default>
+      <p>Unfortunately, at least one input value is invalid</p>
+      <p>Please make sure the input</p>
+    </template>
+    <template #actions>
+      <base-button @click="confirmError">Oke</base-button>
+    </template>
+  </base-dialog>
   <base-card>
     <h2>Add Resources</h2>
     <div>
       <form action="" @submit.prevent="submitData">
         <div class="form-control">
           <label for="title">Title</label>
-          <input id="title" name="title" type="text" v-model="title"/>
+          <input id="title" name="title" type="text" v-model="title" />
         </div>
         <div class="form-control">
           <label for="description">Description</label>
@@ -22,7 +32,7 @@
         </div>
         <div class="form-control">
           <label for="link">Link</label>
-          <input id="link" name="link" type="url" v-model="url"/>
+          <input id="link" name="link" type="url" v-model="url" />
         </div>
         <div>
           <base-button type="submit">Add Resource</base-button>
@@ -33,28 +43,32 @@
 </template>
 
 <script>
-import BaseDialog from '../UI/BaseDialog.vue'
+import BaseDialog from '../UI/BaseDialog.vue';
 export default {
   components: { BaseDialog },
   inject: ['addResource'],
-  data(){
+  data() {
     return {
       title: '',
       description: '',
       url: '',
-      inputIsInvalid: false
-    }
+      inputIsInvalid: false,
+    };
   },
   methods: {
-    submitData(){
-      if(this.title === '' || this.description === '' || this.url === ''){
-        return this.inputIsInvalid = true
-      }else {         
-        return this.addResource(this.title, this.description, this.url)
+    submitData() {
+      if (this.title === '' || this.description === '' || this.url === '') {
+        return (this.inputIsInvalid = true);
+      } else {
+        return this.addResource(this.title, this.description, this.url);
       }
-    }
-  }
-}
+    },
+
+    confirmError() {
+      this.inputIsInvalid = false;
+    },
+  },
+};
 </script>
 
 <style scoped>
